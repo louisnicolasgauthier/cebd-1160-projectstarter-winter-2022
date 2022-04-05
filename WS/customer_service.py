@@ -4,7 +4,7 @@ import BAL.customer
 def sales_service():
 
     app = Flask(__name__)
-    # app.config["DEBUG"] = True
+    app.config["DEBUG"] = True
 
     @app.route('/v1/customers', methods=['GET'])
     def get_all_sales():
