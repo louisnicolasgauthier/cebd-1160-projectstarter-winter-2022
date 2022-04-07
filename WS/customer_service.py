@@ -23,4 +23,21 @@ def sales_service():
         return """<h1>Sales Statistics</h1><p>This site is a prototype API for reporting sales
          statistics for use with Python and Pandas clients.</p>"""
 
+    @app.route('/v1/stats/data/full', methods=['GET'])
+    def get_full_dataset():
+        return jsonify(BAL.customer.get_full_dataset())
+
+
+    @app.route('/v1/stats/data/students', methods=['GET'])
+    def get_students_data():
+        return jsonify(BAL.customer.get_students_data())
+
+    @app.route('/v1/stats/data/province/<province>', methods=['GET'])
+    def get_data_per_province(province):
+        return jsonify(BAL.customer.get_province_data(province))
+
+    @app.route('/v1/stats/data/lfs/<code>', methods=['GET'])
+    def get_data_per_lfs_code(code):
+        return jsonify(BAL.customer.get_data_per_lfs_code(code))
+
     app.run(host='0.0.0.0')

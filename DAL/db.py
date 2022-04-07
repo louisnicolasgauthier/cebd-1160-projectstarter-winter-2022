@@ -15,15 +15,15 @@ class DB(object):
             print(e)
             self.close()
 
-    def execute_select_query(self, table_name, params=None):
+    def execute_select_query(self, db_name, table_name, params=None):
         return_set = []
         cursor = self.connection.cursor(dictionary=True)
         if params is None:
-            cursor.execute("select * from {}".format(table_name))
+            cursor.execute("select * from {}.{}".format(db_name, table_name))
         else:
             where_clause = 'WHERE ' + ' AND '.join(['`' + k + '` = %s' for k in params.keys()])
             values = list(params.values())
-            sql = "SELECT * FROM {} ".format(table_name) + where_clause
+            sql = "SELECT * FROM {}.{} ".format(db_name, table_name) + where_clause
             cursor.execute(sql, values)
         for x in cursor:
             return_set.append(x)
